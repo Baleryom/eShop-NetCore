@@ -1,0 +1,9 @@
+C:\Users\andre\source\repos\eShop\eShop.Domain\bin\Debug\netstandard2.0\eShop.Domain.deps.json
+C:\Users\andre\source\repos\eShop\eShop.Domain\bin\Debug\netstandard2.0\eShop.Domain.dll
+C:\Users\andre\source\repos\eShop\eShop.Domain\bin\Debug\netstandard2.0\eShop.Domain.pdb
+C:\Users\andre\source\repos\eShop\eShop.Domain\obj\Debug\netstandard2.0\eShop.Domain.csprojAssemblyReference.cache
+C:\Users\andre\source\repos\eShop\eShop.Domain\obj\Debug\netstandard2.0\eShop.Domain.AssemblyInfoInputs.cache
+C:\Users\andre\source\repos\eShop\eShop.Domain\obj\Debug\netstandard2.0\eShop.Domain.AssemblyInfo.cs
+C:\Users\andre\source\repos\eShop\eShop.Domain\obj\Debug\netstandard2.0\eShop.Domain.csproj.CoreCompileInputs.cache
+C:\Users\andre\source\repos\eShop\eShop.Domain\obj\Debug\netstandard2.0\eShop.Domain.dll
+C:\Users\andre\source\repos\eShop\eShop.Domain\obj\Debug\netstandard2.0\eShop.Domain.pdb
