@@ -7,7 +7,7 @@ namespace eShop.Api.Interfaces
     {
         List<Product> GetAllProducts();
         bool AddProduct(Product product);
-        bool UpdateProduct(int id, Product updatedProduct);
+        bool UpdateProduct(Product updatedProduct);
         bool DeleteProduct(int id);
     }
 }

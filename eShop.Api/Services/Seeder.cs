@@ -47,9 +47,9 @@ namespace eShop.Api.Services
             return _products;
         }
 
-        public bool UpdateProduct(int id, Product updatedProduct)
+        public bool UpdateProduct(Product updatedProduct)
         {
-            var product = _products.FirstOrDefault(p => p.Id == id);
+            var product = _products.FirstOrDefault(p => p.Id == updatedProduct.Id);
 
             if (product != null)
             {
