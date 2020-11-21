@@ -1,35 +1,34 @@
-﻿using eShop.Domain.Models;
+﻿using eShop.Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
- 
+using System.Linq;
+
 namespace eShop.Api.Controllers
 {
     [Route("/api/[controller]")]
     public class ProductsController : Controller
     {
-        public ProductsController()
+        private readonly ISeeder _seeder;
+        public ProductsController(ISeeder seeder)
         {
-
+            _seeder = seeder;
         }
 
         [HttpGet]
         public IActionResult GetAllProducts()
         {
-            var product = new Product();
-            product.Id = 1;
-            product.Name = "Camera";
-            product.Price = 12.99f;
+          
 
-            return Ok(product);
+            return Ok(_seeder.GetAllProducts());
         }
 
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetProductById(int id)
         {
-            var product = new Product();
-            product.Id = id;
-            product.Name = "Camera";
-            product.Price = 12.99f;
+            var product = _seeder.GetAllProducts().FirstOrDefault(p => p.Id == id);
+
+            if (product is null)
+                return NotFound();
 
             return Ok(product);
         }

@@ -1,11 +1,10 @@
-﻿using System;
+﻿using eShop.Domain.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eShop.Api.Interfaces
 {
     public interface ISeeder
     {
+        List<Product> GetAllProducts();
     }
 }

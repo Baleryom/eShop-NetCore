@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eShop.Api.Interfaces;
+using eShop.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +28,7 @@ namespace eShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+            services.AddScoped<ISeeder, Seeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
