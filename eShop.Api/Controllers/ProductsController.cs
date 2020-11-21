@@ -19,15 +19,19 @@ namespace eShop.Api.Controllers
         [HttpGet]
         public IActionResult GetAllProducts()
         {
-            List<ProductDTO> productsDto = new List<ProductDTO>();
+            List<ProductGetDTO> productsDto = new List<ProductGetDTO>();
             var products = _seeder.GetAllProducts();
 
             foreach (var product in products)
             {
-                var dto = new ProductDTO();
+                var dto = new ProductGetDTO();
+                dto.Id = product.Id;
                 dto.Name = product.Name;
                 dto.Description = product.Description;
                 dto.Price = product.Price;
+                dto.Supplier = product.Supplier;
+                dto.PhotoUrl = product.PhotoUrl;
+               
                 productsDto.Add(dto);
                
             } 
@@ -44,47 +48,62 @@ namespace eShop.Api.Controllers
             if (product is null)
                 return NotFound();
 
-            var productDto = new ProductDTO();
+            var productDto = new ProductGetDTO();
+            productDto.Id = product.Id;
             productDto.Name = product.Name;
             productDto.Description = product.Description;
             productDto.Price = product.Price;
+            productDto.Supplier = product.Supplier;
+            product.PhotoUrl = product.PhotoUrl;
 
             return Ok(productDto);
         }
 
         [HttpPost]
-        public IActionResult CreateProduct([FromBody] ProductDTO productDto)
+        public IActionResult CreateProduct([FromBody] ProductPutPostDTO productDto)
         {
-            var product = new Product();
-            product.Name = productDto.Name;
-            product.Description = productDto.Description;
-            product.Price = productDto.Price;
-            product.Id = 3;
-            product.Supplier = new Supplier();
-            product.PhotoUrl = "https://twitch.tv/";
+            if (ModelState.IsValid)
+            {
+                var product = new Product();
+                product.Name = productDto.Name;
+                product.Description = productDto.Description;
+                product.Price = productDto.Price;
+                product.Id = 3;
+                product.Supplier = new Supplier();
+                product.PhotoUrl = "monekyImage.png";
 
-           var addResult = _seeder.AddProduct(product);
-            if (!addResult)
-                return BadRequest("Product was not added");
-            else
-                return Created("https://localhost:5001/api/products/{product.Id}",product.Id);
+                var addResult = _seeder.AddProduct(product);
+                if (!addResult)
+                    return BadRequest("Product was not added");
+                else
+                    return Created("https://localhost:5001/api/products/{product.Id}", product.Id);
+            }
+
+            return BadRequest("Model is not valid");
+          
         }
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult UpdateProduct([FromBody] ProductDTO updatedProductDto, int id)
+        public IActionResult UpdateProduct([FromBody] ProductPutPostDTO updatedProductDto, int id)
         {
-           var updatedProduct = new Product();
-           updatedProduct.Id = id;
-           updatedProduct.Name = updatedProductDto.Name;
-           updatedProduct.Description = updatedProductDto.Description;
+            if(ModelState.IsValid)
+            {
+                var updatedProduct = new Product();
+                updatedProduct.Id = id;
+                updatedProduct.Name = updatedProductDto.Name;
+                updatedProduct.Description = updatedProductDto.Description;
 
-           var updateResult = _seeder.UpdateProduct(updatedProduct);
-            
-            if (updateResult) 
-            return Ok("Product was updated succesfully!");
+                var updateResult = _seeder.UpdateProduct(updatedProduct);
 
-            return BadRequest("Could't update product. Please try again!");
+                if (updateResult)
+                    return Ok("Product was updated succesfully!");
+
+                return BadRequest("Could't update product. Please try again!");
+            }
+
+            return BadRequest("Model is not valid");
+          
         }
 
         [HttpDelete]
