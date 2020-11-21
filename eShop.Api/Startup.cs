@@ -28,7 +28,8 @@ namespace eShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<ISeeder, Seeder>();
+            services.AddSingleton<ISeeder, Seeder>();// persists for the whole running duration of the app
+                    //.AddScoped persists only for the duration of a single http call
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
