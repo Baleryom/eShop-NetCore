@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using eShop.Api.Interfaces;
 using eShop.Api.Services;
+using eShop.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,9 @@ namespace eShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            var cs = Configuration.GetSection("ConnectionStrings").Value;
+
+            services.AddDbContext<ShopDbContext>( options => options.UseSqlServer(cs));
             services.AddSingleton<ISeeder, Seeder>();// persists for the whole running duration of the app
                     //.AddScoped persists only for the duration of a single http call
         }

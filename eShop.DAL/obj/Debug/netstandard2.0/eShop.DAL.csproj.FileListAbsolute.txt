@@ -1,0 +1,12 @@
+C:\Users\andre\source\repos\eShop\eShop.DAL\bin\Debug\netstandard2.0\eShop.DAL.deps.json
+C:\Users\andre\source\repos\eShop\eShop.DAL\bin\Debug\netstandard2.0\eShop.DAL.dll
+C:\Users\andre\source\repos\eShop\eShop.DAL\obj\Debug\netstandard2.0\eShop.DAL.csprojAssemblyReference.cache
+C:\Users\andre\source\repos\eShop\eShop.DAL\obj\Debug\netstandard2.0\eShop.DAL.AssemblyInfoInputs.cache
+C:\Users\andre\source\repos\eShop\eShop.DAL\obj\Debug\netstandard2.0\eShop.DAL.AssemblyInfo.cs
+C:\Users\andre\source\repos\eShop\eShop.DAL\bin\Debug\netstandard2.0\eShop.Domain.dll
+C:\Users\andre\source\repos\eShop\eShop.DAL\bin\Debug\netstandard2.0\eShop.Domain.pdb
+C:\Users\andre\source\repos\eShop\eShop.DAL\obj\Debug\netstandard2.0\eShop.DAL.csproj.CopyComplete
+C:\Users\andre\source\repos\eShop\eShop.DAL\bin\Debug\netstandard2.0\eShop.DAL.pdb
+C:\Users\andre\source\repos\eShop\eShop.DAL\obj\Debug\netstandard2.0\eShop.DAL.dll
+C:\Users\andre\source\repos\eShop\eShop.DAL\obj\Debug\netstandard2.0\eShop.DAL.pdb
+C:\Users\andre\source\repos\eShop\eShop.DAL\obj\Debug\netstandard2.0\eShop.DAL.csproj.CoreCompileInputs.cache
