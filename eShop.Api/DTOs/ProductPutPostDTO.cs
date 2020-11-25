@@ -14,5 +14,6 @@ namespace eShop.Api.DTOs
         [Required]
         [Range(0,10000000)]
         public double Price { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

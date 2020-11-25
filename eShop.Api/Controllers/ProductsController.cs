@@ -1,9 +1,11 @@
 ﻿using eShop.Api.DTOs;
 using eShop.Api.Interfaces;
+using eShop.Domain.Interfaces;
 using eShop.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace eShop.Api.Controllers
 {
@@ -11,16 +13,17 @@ namespace eShop.Api.Controllers
     public class ProductsController : Controller
     {
         private readonly ISeeder _seeder;
-        public ProductsController(ISeeder seeder)
+        private readonly IProductRepository _products;
+        public ProductsController(IProductRepository products)
         {
-            _seeder = seeder;
+            _products = products;
         }
 
         [HttpGet]
-        public IActionResult GetAllProducts()
+        public async Task<IActionResult> GetAllProducts()
         {
             List<ProductGetDTO> productsDto = new List<ProductGetDTO>();
-            var products = _seeder.GetAllProducts();
+            var products = await _products.GetAllProductsAsync();
 
             foreach (var product in products)
             {
@@ -41,9 +44,9 @@ namespace eShop.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetProductById(int id)
+        public async Task<IActionResult> GetProductById(int id)
         {
-            var product = _seeder.GetAllProducts().FirstOrDefault(p => p.Id == id);
+            var product = await  _products.GetProductByIdAsync(id);
 
             if (product is null)
                 return NotFound();
@@ -60,7 +63,7 @@ namespace eShop.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduct([FromBody] ProductPutPostDTO productDto)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductPutPostDTO productDto)
         {
             if (ModelState.IsValid)
             {
@@ -68,12 +71,10 @@ namespace eShop.Api.Controllers
                 product.Name = productDto.Name;
                 product.Description = productDto.Description;
                 product.Price = productDto.Price;
-                product.Id = 3;
-                product.Supplier = new Supplier();
-                product.PhotoUrl = "monekyImage.png";
-
-                var addResult = _seeder.AddProduct(product);
-                if (!addResult)
+           
+         
+                var addResult = await _products.CreateProductAsync(product);
+                if (addResult == null)
                     return BadRequest("Product was not added");
                 else
                     return Created("https://localhost:5001/api/products/{product.Id}", product.Id);
@@ -85,7 +86,7 @@ namespace eShop.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult UpdateProduct([FromBody] ProductPutPostDTO updatedProductDto, int id)
+        public async Task<IActionResult> UpdateProduct([FromBody] ProductPutPostDTO updatedProductDto, int id)
         {
             if(ModelState.IsValid)
             {
@@ -93,8 +94,10 @@ namespace eShop.Api.Controllers
                 updatedProduct.Id = id;
                 updatedProduct.Name = updatedProductDto.Name;
                 updatedProduct.Description = updatedProductDto.Description;
+                updatedProduct.PhotoUrl = updatedProductDto.PhotoUrl;
+                updatedProduct.Price = updatedProductDto.Price;
 
-                var updateResult = _seeder.UpdateProduct(updatedProduct);
+                var updateResult = await _products.UpdateProductAsync(updatedProduct);
 
                 if (updateResult)
                     return Ok("Product was updated succesfully!");
@@ -108,9 +111,9 @@ namespace eShop.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            var deleteResult = _seeder.DeleteProduct(id);
+            var deleteResult = await _products.DeleteProductAsync(id);
 
             if (deleteResult)
                 return Ok("Product was deleted!");
